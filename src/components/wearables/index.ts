@@ -1,0 +1,1 @@
+export { WearableSync } from './WearableSync'

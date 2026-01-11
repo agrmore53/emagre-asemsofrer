@@ -1,0 +1,1 @@
+export { MealPhotoLogger } from './MealPhotoLogger'

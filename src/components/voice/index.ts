@@ -1,0 +1,1 @@
+export { VoiceLogger } from './VoiceLogger'
