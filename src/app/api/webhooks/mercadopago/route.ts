@@ -6,12 +6,15 @@ import {
   calcularDataExpiracao,
   type PlanoId,
 } from '@/lib/mercadopago/client'
+import { createMockClient, DEMO_MODE } from '@/lib/supabase/mock-client'
 
 // Cliente admin para operações no webhook (sem auth do usuário)
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+const supabaseAdmin = DEMO_MODE
+  ? createMockClient()
+  : createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
 
 // POST - Recebe notificações do Mercado Pago
 export async function POST(request: Request) {
