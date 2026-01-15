@@ -1,7 +1,23 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { DEMO_MODE } from './mock-client'
 
 export async function updateSession(request: NextRequest) {
+  // Modo demonstracao - permite acesso a todas as rotas
+  if (DEMO_MODE) {
+    // Redireciona login/cadastro para dashboard em modo demo
+    const authRoutes = ['/login', '/cadastro']
+    const isAuthRoute = authRoutes.some(route =>
+      request.nextUrl.pathname === route
+    )
+    if (isAuthRoute) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/dashboard'
+      return NextResponse.redirect(url)
+    }
+    return NextResponse.next({ request })
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })
