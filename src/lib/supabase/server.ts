@@ -2,12 +2,19 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { createMockClient, DEMO_MODE } from './mock-client'
 
+console.log('[SERVER] server.ts carregado, DEMO_MODE:', DEMO_MODE)
+
 export async function createClient() {
+  console.log('[SERVER] createClient() chamado, DEMO_MODE:', DEMO_MODE)
+
   // Modo demonstracao - usa dados fake
   if (DEMO_MODE) {
+    console.log('[SERVER] Usando mock client')
     return createMockClient() as unknown as ReturnType<typeof createServerClient>
   }
 
+  console.log('[SERVER] Usando Supabase real')
+  console.log('[SERVER] URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
   const cookieStore = await cookies()
 
   return createServerClient(

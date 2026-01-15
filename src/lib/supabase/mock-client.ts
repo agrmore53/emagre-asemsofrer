@@ -1,4 +1,6 @@
 // Mock do cliente Supabase para modo demonstracao
+console.log('[MOCK] Carregando mock-client.ts')
+
 import {
   DEMO_USER,
   DEMO_PROFILE,
@@ -10,6 +12,8 @@ import {
   DEMO_CARDAPIOS,
   DEMO_CHALLENGES,
 } from './mock-data'
+
+console.log('[MOCK] Dados importados com sucesso')
 
 // Estado em memoria (simula banco de dados)
 let mockTrackerRegistros = [...DEMO_TRACKER_REGISTROS]
@@ -244,32 +248,71 @@ class MockDeleteBuilder {
 
 // Mock Supabase Client
 export function createMockClient() {
+  console.log('[MOCK] createMockClient() chamado')
   return {
     auth: {
-      getUser: async () => ({ data: { user: DEMO_USER }, error: null }),
-      getSession: async () => ({ data: { session: { user: DEMO_USER } }, error: null }),
-      signInWithPassword: async () => ({ data: { user: DEMO_USER, session: {} }, error: null }),
-      signUp: async () => ({ data: { user: DEMO_USER, session: {} }, error: null }),
-      signOut: async () => ({ error: null }),
-      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
-    },
-    from: (tableName: string) => ({
-      select: (columns: string = '*') => {
-        const builder = new MockQueryBuilder(tableName)
-        return builder.select(columns)
+      getUser: async () => {
+        console.log('[MOCK] auth.getUser() chamado')
+        return { data: { user: DEMO_USER }, error: null }
       },
-      insert: (data: unknown) => new MockInsertBuilder(tableName, data),
-      update: (data: Record<string, unknown>) => new MockUpdateBuilder(tableName, data),
-      delete: () => new MockDeleteBuilder(tableName),
-      upsert: (data: unknown) => new MockInsertBuilder(tableName, data),
-    }),
+      getSession: async () => {
+        console.log('[MOCK] auth.getSession() chamado')
+        return { data: { session: { user: DEMO_USER } }, error: null }
+      },
+      signInWithPassword: async () => {
+        console.log('[MOCK] auth.signInWithPassword() chamado')
+        return { data: { user: DEMO_USER, session: {} }, error: null }
+      },
+      signUp: async () => {
+        console.log('[MOCK] auth.signUp() chamado')
+        return { data: { user: DEMO_USER, session: {} }, error: null }
+      },
+      signOut: async () => {
+        console.log('[MOCK] auth.signOut() chamado')
+        return { error: null }
+      },
+      onAuthStateChange: () => {
+        console.log('[MOCK] auth.onAuthStateChange() chamado')
+        return { data: { subscription: { unsubscribe: () => {} } } }
+      },
+    },
+    from: (tableName: string) => {
+      console.log(`[MOCK] from('${tableName}') chamado`)
+      return {
+        select: (columns: string = '*') => {
+          console.log(`[MOCK] select('${columns}') em ${tableName}`)
+          const builder = new MockQueryBuilder(tableName)
+          return builder.select(columns)
+        },
+        insert: (data: unknown) => {
+          console.log(`[MOCK] insert() em ${tableName}`)
+          return new MockInsertBuilder(tableName, data)
+        },
+        update: (data: Record<string, unknown>) => {
+          console.log(`[MOCK] update() em ${tableName}`)
+          return new MockUpdateBuilder(tableName, data)
+        },
+        delete: () => {
+          console.log(`[MOCK] delete() em ${tableName}`)
+          return new MockDeleteBuilder(tableName)
+        },
+        upsert: (data: unknown) => {
+          console.log(`[MOCK] upsert() em ${tableName}`)
+          return new MockInsertBuilder(tableName, data)
+        },
+      }
+    },
     storage: {
-      from: () => ({
-        upload: async () => ({ data: { path: 'mock-path' }, error: null }),
-        getPublicUrl: () => ({ data: { publicUrl: '/placeholder.jpg' } }),
-      }),
+      from: (bucket: string) => {
+        console.log(`[MOCK] storage.from('${bucket}') chamado`)
+        return {
+          upload: async () => ({ data: { path: 'mock-path' }, error: null }),
+          getPublicUrl: () => ({ data: { publicUrl: '/placeholder.jpg' } }),
+        }
+      },
     },
   }
 }
 
+console.log('[MOCK] DEMO_MODE = true')
 export const DEMO_MODE = true

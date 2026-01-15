@@ -2,19 +2,27 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { DEMO_MODE } from './mock-client'
 
+console.log('[MIDDLEWARE] middleware.ts carregado, DEMO_MODE:', DEMO_MODE)
+
 export async function updateSession(request: NextRequest) {
+  console.log('[MIDDLEWARE] updateSession() chamado para:', request.nextUrl.pathname)
+  console.log('[MIDDLEWARE] DEMO_MODE:', DEMO_MODE)
+
   // Modo demonstracao - permite acesso a todas as rotas
   if (DEMO_MODE) {
+    console.log('[MIDDLEWARE] Modo demo ativo')
     // Redireciona login/cadastro para dashboard em modo demo
     const authRoutes = ['/login', '/cadastro']
     const isAuthRoute = authRoutes.some(route =>
       request.nextUrl.pathname === route
     )
     if (isAuthRoute) {
+      console.log('[MIDDLEWARE] Redirecionando para /dashboard')
       const url = request.nextUrl.clone()
       url.pathname = '/dashboard'
       return NextResponse.redirect(url)
     }
+    console.log('[MIDDLEWARE] Permitindo acesso')
     return NextResponse.next({ request })
   }
 
