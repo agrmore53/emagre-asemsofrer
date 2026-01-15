@@ -49,14 +49,14 @@ export const DEMO_STREAK = {
 }
 
 export const DEMO_CONQUISTAS = [
-  { id: 'conq-1', codigo: 'primeiro-registro', nome: 'Primeiro Passo', descricao: 'Fez seu primeiro registro de peso', icone: '🎯', pontos: 10, ordem: 1 },
-  { id: 'conq-2', codigo: 'streak-7', nome: 'Semana Firme', descricao: '7 dias consecutivos de registro', icone: '🔥', pontos: 50, ordem: 2 },
-  { id: 'conq-3', codigo: 'streak-30', nome: 'Mes de Ouro', descricao: '30 dias consecutivos de registro', icone: '🏆', pontos: 200, ordem: 3 },
-  { id: 'conq-4', codigo: 'primeiro-kg', nome: 'Primeiro Quilo', descricao: 'Perdeu seu primeiro quilograma', icone: '⚖️', pontos: 100, ordem: 4 },
-  { id: 'conq-5', codigo: 'cinco-kg', nome: 'Cinco Quilos', descricao: 'Perdeu 5 quilogramas', icone: '💪', pontos: 300, ordem: 5 },
-  { id: 'conq-6', codigo: 'cap-1', nome: 'Leitor Iniciante', descricao: 'Completou o primeiro capitulo', icone: '📖', pontos: 20, ordem: 6 },
-  { id: 'conq-7', codigo: 'cap-todos', nome: 'Estudioso', descricao: 'Completou todos os capitulos', icone: '🎓', pontos: 500, ordem: 7 },
-  { id: 'conq-8', codigo: 'cardapio-1', nome: 'Planejador', descricao: 'Gerou seu primeiro cardapio', icone: '🍽️', pontos: 30, ordem: 8 },
+  { id: 'conq-1', codigo: 'primeiro-registro', titulo: 'Primeiro Passo', descricao: 'Fez seu primeiro registro de peso', icone: 'Target', pontos: 10, ordem: 1, categoria: 'engajamento', requisito: {} },
+  { id: 'conq-2', codigo: 'streak-7', titulo: 'Semana Firme', descricao: '7 dias consecutivos de registro', icone: 'Flame', pontos: 50, ordem: 2, categoria: 'streak', requisito: {} },
+  { id: 'conq-3', codigo: 'streak-30', titulo: 'Mes de Ouro', descricao: '30 dias consecutivos de registro', icone: 'Trophy', pontos: 200, ordem: 3, categoria: 'streak', requisito: {} },
+  { id: 'conq-4', codigo: 'primeiro-kg', titulo: 'Primeiro Quilo', descricao: 'Perdeu seu primeiro quilograma', icone: 'Scale', pontos: 100, ordem: 4, categoria: 'peso', requisito: {} },
+  { id: 'conq-5', codigo: 'cinco-kg', titulo: 'Cinco Quilos', descricao: 'Perdeu 5 quilogramas', icone: 'Dumbbell', pontos: 300, ordem: 5, categoria: 'peso', requisito: {} },
+  { id: 'conq-6', codigo: 'cap-1', titulo: 'Leitor Iniciante', descricao: 'Completou o primeiro capitulo', icone: 'BookOpen', pontos: 20, ordem: 6, categoria: 'conteudo', requisito: {} },
+  { id: 'conq-7', codigo: 'cap-todos', titulo: 'Estudioso', descricao: 'Completou todos os capitulos', icone: 'GraduationCap', pontos: 500, ordem: 7, categoria: 'conteudo', requisito: {} },
+  { id: 'conq-8', codigo: 'cardapio-1', titulo: 'Planejador', descricao: 'Gerou seu primeiro cardapio', icone: 'Utensils', pontos: 30, ordem: 8, categoria: 'engajamento', requisito: {} },
 ]
 
 export const DEMO_USUARIO_CONQUISTAS = [

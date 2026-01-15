@@ -8,6 +8,7 @@ import { CAPITULOS } from '@/types'
 import { CardStreak } from '@/components/gamificacao/CardStreak'
 import { ListaConquistas } from '@/components/gamificacao/ListaConquistas'
 import type { UsuarioStreak, Conquista, UsuarioConquista } from '@/types'
+import { BookOpen, TrendingUp, Utensils, Lightbulb, Crown } from 'lucide-react'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -75,7 +76,7 @@ export default async function DashboardPage() {
       {/* Boas-vindas */}
       <div>
         <h1 className="text-3xl font-bold">
-          Olá, {profile?.nome?.split(' ')[0] || 'você'}! 👋
+          Bem-vindo(a), {profile?.nome?.split(' ')[0] || 'você'}
         </h1>
         <p className="text-muted-foreground mt-2">
           Continue sua jornada rumo a uma vida mais saudável.
@@ -135,8 +136,9 @@ export default async function DashboardPage() {
           <CardHeader className="pb-2">
             <CardDescription>Seu plano</CardDescription>
             <CardTitle className="flex items-center gap-2">
-              <Badge variant={profile?.plano === 'premium' ? 'default' : 'secondary'}>
-                {profile?.plano === 'premium' ? '⭐ Premium' : profile?.plano === 'basico' ? 'Básico' : 'Grátis'}
+              <Badge variant={profile?.plano === 'premium' ? 'default' : 'secondary'} className="flex items-center gap-1">
+                {profile?.plano === 'premium' && <Crown className="h-3 w-3" />}
+                {profile?.plano === 'premium' ? 'Premium' : profile?.plano === 'basico' ? 'Básico' : 'Grátis'}
               </Badge>
             </CardTitle>
           </CardHeader>
@@ -158,7 +160,8 @@ export default async function DashboardPage() {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              📖 Continuar Leitura
+              <BookOpen className="h-5 w-5 text-primary" />
+              Continuar Leitura
             </CardTitle>
             <CardDescription>
               {capitulosConcluidos < CAPITULOS.length
@@ -179,7 +182,8 @@ export default async function DashboardPage() {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              📈 Registrar Progresso
+              <TrendingUp className="h-5 w-5 text-primary" />
+              Registrar Progresso
             </CardTitle>
             <CardDescription>
               {ultimoRegistro
@@ -200,7 +204,8 @@ export default async function DashboardPage() {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              🍽️ Cardápio do Dia
+              <Utensils className="h-5 w-5 text-primary" />
+              Cardápio do Dia
             </CardTitle>
             <CardDescription>
               Veja suas refeições planejadas para hoje
@@ -230,7 +235,8 @@ export default async function DashboardPage() {
       <Card className="bg-primary/5 border-primary/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-primary">
-            💡 Dica do Dia
+            <Lightbulb className="h-5 w-5" />
+            Dica do Dia
           </CardTitle>
         </CardHeader>
         <CardContent>

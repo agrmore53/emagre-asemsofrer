@@ -5,7 +5,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Lock, CheckCircle, Trophy } from 'lucide-react'
+import {
+  Lock,
+  CheckCircle,
+  Trophy,
+  Target,
+  Flame,
+  Scale,
+  Dumbbell,
+  BookOpen,
+  GraduationCap,
+  Utensils,
+  Star,
+  Gem,
+  Award
+} from 'lucide-react'
 import type { Conquista, UsuarioConquista, CategoriaConquista } from '@/types'
 import { format, parseISO } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -16,13 +30,33 @@ interface ListaConquistasProps {
   compacto?: boolean
 }
 
-const CATEGORIAS: { id: CategoriaConquista; nome: string; icone: string }[] = [
-  { id: 'streak', nome: 'Sequência', icone: '🔥' },
-  { id: 'peso', nome: 'Peso', icone: '⚖️' },
-  { id: 'conteudo', nome: 'Conteúdo', icone: '📖' },
-  { id: 'engajamento', nome: 'Engajamento', icone: '⭐' },
-  { id: 'especial', nome: 'Especiais', icone: '💎' },
+// Mapeamento de nomes de icones para componentes
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Target,
+  Flame,
+  Trophy,
+  Scale,
+  Dumbbell,
+  BookOpen,
+  GraduationCap,
+  Utensils,
+  Star,
+  Gem,
+  Award,
+}
+
+const CATEGORIAS: { id: CategoriaConquista; nome: string; icon: React.ComponentType<{ className?: string }> }[] = [
+  { id: 'streak', nome: 'Sequencia', icon: Flame },
+  { id: 'peso', nome: 'Peso', icon: Scale },
+  { id: 'conteudo', nome: 'Conteudo', icon: BookOpen },
+  { id: 'engajamento', nome: 'Engajamento', icon: Star },
+  { id: 'especial', nome: 'Especiais', icon: Gem },
 ]
+
+function ConquistaIcon({ icone, className }: { icone: string; className?: string }) {
+  const IconComponent = ICON_MAP[icone] || Award
+  return <IconComponent className={className} />
+}
 
 export function ListaConquistas({
   conquistasUsuario,
@@ -43,7 +77,7 @@ export function ListaConquistas({
   const totalConquistas = todasConquistas.length
   const percentualCompleto = Math.round((totalDesbloqueadas / totalConquistas) * 100)
 
-  // Modo compacto - mostra apenas as últimas desbloqueadas
+  // Modo compacto - mostra apenas as ultimas desbloqueadas
   if (compacto) {
     const ultimasConquistas = [...conquistasUsuario]
       .sort((a, b) =>
@@ -78,7 +112,7 @@ export function ListaConquistas({
                     className="flex items-center gap-2 bg-muted rounded-full px-3 py-1"
                     title={conquista.descricao}
                   >
-                    <span className="text-lg">{conquista.icone}</span>
+                    <ConquistaIcon icone={conquista.icone} className="h-4 w-4 text-primary" />
                     <span className="text-sm font-medium">{conquista.titulo}</span>
                   </div>
                 )
@@ -121,8 +155,8 @@ export function ListaConquistas({
               Todas
             </TabsTrigger>
             {CATEGORIAS.map((cat) => (
-              <TabsTrigger key={cat.id} value={cat.id} className="text-xs">
-                <span className="mr-1">{cat.icone}</span>
+              <TabsTrigger key={cat.id} value={cat.id} className="text-xs flex items-center gap-1">
+                <cat.icon className="h-3 w-3" />
                 {cat.nome}
               </TabsTrigger>
             ))}
@@ -141,17 +175,20 @@ export function ListaConquistas({
                     key={conquista.id}
                     className={`relative border rounded-lg p-4 transition-all ${
                       desbloqueada
-                        ? 'bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-200'
+                        ? 'bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-200 dark:from-yellow-950/20 dark:to-amber-950/20 dark:border-yellow-800'
                         : 'bg-muted/30 opacity-60'
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       <div
-                        className={`text-3xl ${
-                          desbloqueada ? '' : 'grayscale opacity-50'
+                        className={`p-2 rounded-full ${
+                          desbloqueada ? 'bg-primary/10' : 'bg-muted grayscale opacity-50'
                         }`}
                       >
-                        {conquista.icone}
+                        <ConquistaIcon
+                          icone={conquista.icone}
+                          className={`h-6 w-6 ${desbloqueada ? 'text-primary' : 'text-muted-foreground'}`}
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">

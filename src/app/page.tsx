@@ -2,6 +2,22 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import {
+  Leaf,
+  Sparkles,
+  Ban,
+  TrendingDown,
+  Heart,
+  BookOpen,
+  LineChart,
+  Utensils,
+  Trophy,
+  BarChart3,
+  ClipboardList,
+  ShoppingCart,
+  Users,
+  Check
+} from 'lucide-react'
 
 export default function HomePage() {
   return (
@@ -9,15 +25,15 @@ export default function HomePage() {
       {/* Header */}
       <header className="container py-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-2xl">🥗</span>
-          <span className="font-bold text-xl">Emagreça Sem Sofrer</span>
+          <Leaf className="h-8 w-8 text-primary" />
+          <span className="font-bold text-xl">Emagreca Sem Sofrer</span>
         </div>
         <div className="flex items-center gap-4">
           <Link href="/login">
             <Button variant="ghost">Entrar</Button>
           </Link>
           <Link href="/cadastro">
-            <Button>Começar Grátis</Button>
+            <Button>Comecar Gratis</Button>
           </Link>
         </div>
       </header>
@@ -25,19 +41,20 @@ export default function HomePage() {
       {/* Hero */}
       <section className="container py-20 text-center">
         <Badge className="mb-6" variant="secondary">
-          ✨ Novo: Cardápios personalizados com IA
+          <Sparkles className="h-3 w-3 mr-1" />
+          Novo: Cardapios personalizados com IA
         </Badge>
         <h1 className="text-4xl md:text-6xl font-bold max-w-4xl mx-auto leading-tight">
-          Emagreça de verdade, <span className="text-primary">sem abrir mão</span> do que você ama comer
+          Emagreca de verdade, <span className="text-primary">sem abrir mao</span> do que voce ama comer
         </h1>
         <p className="text-xl text-muted-foreground mt-6 max-w-2xl mx-auto">
-          O método que já ajudou milhares de pessoas a perder peso sem dietas restritivas,
+          O metodo que ja ajudou milhares de pessoas a perder peso sem dietas restritivas,
           sem passar fome e sem culpa.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
           <Link href="/cadastro">
             <Button size="lg" className="text-lg px-8">
-              Começar Grátis →
+              Comecar Gratis
             </Button>
           </Link>
           <Link href="#como-funciona">
@@ -46,26 +63,30 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
-        <p className="text-sm text-muted-foreground mt-4">
-          ✓ Sem cartão de crédito &nbsp; ✓ Acesso imediato &nbsp; ✓ Cancele quando quiser
-        </p>
+        <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground mt-6">
+          <span className="flex items-center gap-1"><Check className="h-4 w-4 text-green-500" /> Sem cartao de credito</span>
+          <span className="flex items-center gap-1"><Check className="h-4 w-4 text-green-500" /> Acesso imediato</span>
+          <span className="flex items-center gap-1"><Check className="h-4 w-4 text-green-500" /> Cancele quando quiser</span>
+        </div>
       </section>
 
       {/* Problema */}
       <section className="bg-muted py-20">
         <div className="container">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Você já tentou de tudo para emagrecer?
+            Voce ja tentou de tudo para emagrecer?
           </h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { emoji: '🚫', title: 'Dietas restritivas', desc: 'Cortar carboidrato, jejum, dieta da sopa...' },
-              { emoji: '😔', title: 'Efeito sanfona', desc: 'Perde peso, depois engorda tudo de volta' },
-              { emoji: '😰', title: 'Culpa constante', desc: 'Se sentir mal por comer o que gosta' },
+              { icon: Ban, title: 'Dietas restritivas', desc: 'Cortar carboidrato, jejum, dieta da sopa...' },
+              { icon: TrendingDown, title: 'Efeito sanfona', desc: 'Perde peso, depois engorda tudo de volta' },
+              { icon: Heart, title: 'Culpa constante', desc: 'Se sentir mal por comer o que gosta' },
             ].map((item, i) => (
               <Card key={i} className="text-center">
                 <CardHeader>
-                  <span className="text-4xl mb-2">{item.emoji}</span>
+                  <div className="mx-auto mb-2 w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
+                    <item.icon className="h-6 w-6 text-destructive" />
+                  </div>
                   <CardTitle>{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -75,7 +96,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-center text-xl mt-12 font-medium">
-            A boa notícia: <span className="text-primary">existe outro caminho.</span>
+            A boa noticia: <span className="text-primary">existe outro caminho.</span>
           </p>
         </div>
       </section>
@@ -83,21 +104,21 @@ export default function HomePage() {
       {/* Como funciona */}
       <section id="como-funciona" className="container py-20">
         <h2 className="text-3xl font-bold text-center mb-4">
-          O Método Emagreça Sem Sofrer
+          O Metodo Emagreca Sem Sofrer
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Uma abordagem baseada em ciência que funciona com a sua vida, não contra ela.
+          Uma abordagem baseada em ciencia que funciona com a sua vida, nao contra ela.
         </p>
         <div className="grid md:grid-cols-4 gap-8">
           {[
-            { step: '1', title: 'Aprenda', desc: 'Entenda o único princípio que faz você emagrecer de verdade', icon: '📖' },
-            { step: '2', title: 'Acompanhe', desc: 'Registre seu progresso e veja sua evolução em gráficos', icon: '📈' },
-            { step: '3', title: 'Coma bem', desc: 'Receba cardápios personalizados para sua rotina', icon: '🍽️' },
-            { step: '4', title: 'Transforme', desc: 'Construa hábitos que duram para a vida toda', icon: '🏆' },
+            { step: '1', title: 'Aprenda', desc: 'Entenda o unico principio que faz voce emagrecer de verdade', icon: BookOpen },
+            { step: '2', title: 'Acompanhe', desc: 'Registre seu progresso e veja sua evolucao em graficos', icon: LineChart },
+            { step: '3', title: 'Coma bem', desc: 'Receba cardapios personalizados para sua rotina', icon: Utensils },
+            { step: '4', title: 'Transforme', desc: 'Construa habitos que duram para a vida toda', icon: Trophy },
           ].map((item, i) => (
             <div key={i} className="text-center">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">{item.icon}</span>
+                <item.icon className="h-8 w-8 text-primary" />
               </div>
               <Badge variant="outline" className="mb-2">Passo {item.step}</Badge>
               <h3 className="font-bold text-lg">{item.title}</h3>
@@ -111,20 +132,22 @@ export default function HomePage() {
       <section className="bg-muted py-20">
         <div className="container">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Tudo que você precisa em um só lugar
+            Tudo que voce precisa em um so lugar
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: '📖', title: 'Conteúdo Interativo', desc: '8 capítulos completos sobre emagrecimento saudável' },
-              { icon: '📊', title: 'Tracker de Progresso', desc: 'Registre peso e medidas, veja gráficos de evolução' },
-              { icon: '🍽️', title: 'Cardápios Personalizados', desc: 'Refeições adaptadas ao seu perfil e preferências' },
-              { icon: '📝', title: 'Checklist Diário', desc: 'Acompanhe suas metas do dia de forma simples' },
-              { icon: '🛒', title: 'Lista de Compras', desc: 'Gerada automaticamente baseada no seu cardápio' },
-              { icon: '💬', title: 'Comunidade', desc: 'Conecte-se com outras pessoas na mesma jornada' },
+              { icon: BookOpen, title: 'Conteudo Interativo', desc: '8 capitulos completos sobre emagrecimento saudavel' },
+              { icon: BarChart3, title: 'Tracker de Progresso', desc: 'Registre peso e medidas, veja graficos de evolucao' },
+              { icon: Utensils, title: 'Cardapios Personalizados', desc: 'Refeicoes adaptadas ao seu perfil e preferencias' },
+              { icon: ClipboardList, title: 'Checklist Diario', desc: 'Acompanhe suas metas do dia de forma simples' },
+              { icon: ShoppingCart, title: 'Lista de Compras', desc: 'Gerada automaticamente baseada no seu cardapio' },
+              { icon: Users, title: 'Comunidade', desc: 'Conecte-se com outras pessoas na mesma jornada' },
             ].map((item, i) => (
               <Card key={i}>
                 <CardHeader>
-                  <span className="text-3xl mb-2">{item.icon}</span>
+                  <div className="mb-2 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <item.icon className="h-5 w-5 text-primary" />
+                  </div>
                   <CardTitle>{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -142,43 +165,43 @@ export default function HomePage() {
           Escolha seu plano
         </h2>
         <p className="text-center text-muted-foreground mb-12">
-          Comece grátis e faça upgrade quando quiser
+          Comece gratis e faca upgrade quando quiser
         </p>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {/* Grátis */}
+          {/* Gratis */}
           <Card>
             <CardHeader>
-              <CardTitle>Grátis</CardTitle>
-              <CardDescription>Para começar sua jornada</CardDescription>
+              <CardTitle>Gratis</CardTitle>
+              <CardDescription>Para comecar sua jornada</CardDescription>
               <div className="text-4xl font-bold mt-4">R$0</div>
             </CardHeader>
             <CardContent className="space-y-3">
-              {['Capítulo 1 completo', 'Tracker básico (7 dias)', 'Calculadora de calorias'].map((item, i) => (
+              {['Capitulo 1 completo', 'Tracker basico (7 dias)', 'Calculadora de calorias'].map((item, i) => (
                 <p key={i} className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> {item}
+                  <Check className="h-4 w-4 text-green-500" /> {item}
                 </p>
               ))}
               <Link href="/cadastro" className="block mt-6">
-                <Button variant="outline" className="w-full">Criar conta grátis</Button>
+                <Button variant="outline" className="w-full">Criar conta gratis</Button>
               </Link>
             </CardContent>
           </Card>
 
-          {/* Básico */}
+          {/* Basico */}
           <Card className="border-primary shadow-lg relative">
             <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Mais popular</Badge>
             <CardHeader>
-              <CardTitle>Básico</CardTitle>
+              <CardTitle>Basico</CardTitle>
               <CardDescription>Para quem quer resultados</CardDescription>
               <div className="mt-4">
                 <span className="text-4xl font-bold">R$29</span>
-                <span className="text-muted-foreground">/mês</span>
+                <span className="text-muted-foreground">/mes</span>
               </div>
             </CardHeader>
             <CardContent className="space-y-3">
-              {['Todo o conteúdo (8 capítulos)', 'Tracker completo ilimitado', 'Histórico de progresso', 'Bônus exclusivos'].map((item, i) => (
+              {['Todo o conteudo (8 capitulos)', 'Tracker completo ilimitado', 'Historico de progresso', 'Bonus exclusivos'].map((item, i) => (
                 <p key={i} className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> {item}
+                  <Check className="h-4 w-4 text-green-500" /> {item}
                 </p>
               ))}
               <Link href="/cadastro" className="block mt-6">
@@ -191,16 +214,16 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle>Premium</CardTitle>
-              <CardDescription>Experiência completa</CardDescription>
+              <CardDescription>Experiencia completa</CardDescription>
               <div className="mt-4">
                 <span className="text-4xl font-bold">R$49</span>
-                <span className="text-muted-foreground">/mês</span>
+                <span className="text-muted-foreground">/mes</span>
               </div>
             </CardHeader>
             <CardContent className="space-y-3">
-              {['Tudo do plano Básico', 'Cardápios personalizados', 'Lista de compras automática', 'Suporte prioritário'].map((item, i) => (
+              {['Tudo do plano Basico', 'Cardapios personalizados', 'Lista de compras automatica', 'Suporte prioritario'].map((item, i) => (
                 <p key={i} className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> {item}
+                  <Check className="h-4 w-4 text-green-500" /> {item}
                 </p>
               ))}
               <Link href="/cadastro" className="block mt-6">
@@ -215,14 +238,14 @@ export default function HomePage() {
       <section className="bg-primary text-primary-foreground py-20">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Pronto para começar sua transformação?
+            Pronto para comecar sua transformacao?
           </h2>
           <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-            Junte-se a milhares de pessoas que já descobriram que emagrecer não precisa ser sofrimento.
+            Junte-se a milhares de pessoas que ja descobriram que emagrecer nao precisa ser sofrimento.
           </p>
           <Link href="/cadastro">
             <Button size="lg" variant="secondary" className="text-lg px-8">
-              Começar Grátis Agora →
+              Comecar Gratis Agora
             </Button>
           </Link>
         </div>
@@ -233,16 +256,15 @@ export default function HomePage() {
         <div className="container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🥗</span>
-              <span className="font-bold">Emagreça Sem Sofrer</span>
+              <Leaf className="h-6 w-6 text-primary" />
+              <span className="font-bold">Emagreca Sem Sofrer</span>
             </div>
             <div className="flex gap-6 text-sm text-muted-foreground">
               <Link href="/termos" className="hover:text-primary">Termos de Uso</Link>
               <Link href="/privacidade" className="hover:text-primary">Privacidade</Link>
-              <Link href="/contato" className="hover:text-primary">Contato</Link>
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2025 Emagreça Sem Sofrer
+              2025 Emagreca Sem Sofrer. Todos os direitos reservados.
             </p>
           </div>
         </div>
