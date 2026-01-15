@@ -53,7 +53,7 @@ export default async function CapituloPage({ params }: PageProps) {
     .select('capitulo_id, concluido')
     .eq('user_id', user?.id)
 
-  const capitulosConcluidos = todoProgresso?.filter(p => p.concluido).length || 0
+  const capitulosConcluidos = todoProgresso?.filter((p: { capitulo_id: string; concluido: boolean }) => p.concluido).length || 0
   const progressoGeral = Math.round((capitulosConcluidos / CAPITULOS_CONTEUDO.length) * 100)
 
   // Encontra capítulos anterior e próximo

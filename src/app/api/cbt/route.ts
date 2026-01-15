@@ -41,7 +41,7 @@ export async function GET() {
 
     // Streak de dias consecutivos
     let streak = 0
-    const datas = [...new Set(progresso?.map((p) => p.data_conclusao) || [])]
+    const datas = [...new Set(progresso?.map((p) => p.data_conclusao as string) || [])]
       .sort()
       .reverse()
 
@@ -53,8 +53,8 @@ export async function GET() {
       if (datas[0] === hoje || datas[0] === ontemStr) {
         streak = 1
         for (let i = 1; i < datas.length; i++) {
-          const dataAtual = new Date(datas[i - 1])
-          const dataAnterior = new Date(datas[i])
+          const dataAtual = new Date(datas[i - 1] as string)
+          const dataAnterior = new Date(datas[i] as string)
           const diff = Math.floor(
             (dataAtual.getTime() - dataAnterior.getTime()) / (1000 * 60 * 60 * 24)
           )

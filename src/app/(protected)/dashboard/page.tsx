@@ -57,7 +57,7 @@ export default async function DashboardPage() {
     .order('ordem', { ascending: true })
 
   // Calcula o progresso
-  const capitulosConcluidos = progresso?.filter((p) => p.concluido).length || 0
+  const capitulosConcluidos = progresso?.filter((p: { concluido: boolean }) => p.concluido).length || 0
   const progressoPercentual = Math.round((capitulosConcluidos / CAPITULOS.length) * 100)
 
   // Calcula dias desde o início

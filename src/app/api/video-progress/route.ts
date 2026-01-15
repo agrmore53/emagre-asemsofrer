@@ -43,7 +43,9 @@ export async function GET(request: NextRequest) {
         .select('id, nome')
         .in('id', userIds)
 
-      const profileMap = new Map(profiles?.map(p => [p.id, p]) || [])
+      const profileMap = new Map<string, { id: string; nome: string }>(
+        profiles?.map((p: { id: string; nome: string }) => [p.id, p]) || []
+      )
       const videosComPerfil = videos.map(v => ({
         ...v,
         user_nome: profileMap.get(v.user_id)?.nome || 'Usuário'

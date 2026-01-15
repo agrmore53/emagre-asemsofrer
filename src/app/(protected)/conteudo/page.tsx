@@ -27,12 +27,13 @@ export default async function ConteudoPage() {
     .select('*')
     .eq('user_id', user?.id)
 
-  const progressoMap = new Map(
-    progresso?.map((p) => [p.capitulo_id, p]) || []
+  type ProgressoItem = { capitulo_id: string; concluido: boolean; concluido_em?: string }
+  const progressoMap = new Map<string, ProgressoItem>(
+    progresso?.map((p: ProgressoItem) => [p.capitulo_id, p] as [string, ProgressoItem]) || []
   )
 
   // Calcula estatísticas
-  const capitulosConcluidos = progresso?.filter((p) => p.concluido).length || 0
+  const capitulosConcluidos = progresso?.filter((p: ProgressoItem) => p.concluido).length || 0
   const progressoPercentual = Math.round((capitulosConcluidos / CAPITULOS_CONTEUDO.length) * 100)
   const tempoTotalLeitura = CAPITULOS_CONTEUDO.reduce((acc, cap) => acc + cap.tempoLeitura, 0)
   const tempoRestante = CAPITULOS_CONTEUDO
